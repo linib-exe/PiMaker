@@ -6,19 +6,28 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="setup_block"></block>
                 <block type="loop_block"></block>
                 <block type="delay_block"></block>
+                <block type="text"></block>
+            </category>
+
+            <category name="Loop" colour="210">
+                <block type="while_loop"></block>
+                <block type="for_loop"></block>
             </category>
 
             <!-- Category: Logic -->
             <category name="Logic" colour="120">
                 <block type="if_then_block"></block>
                 <block type="if_else_if_else_block"></block>
+                <block type="if_else_if_block"></block>
                 <block type="boolean_block"></block>
                 <block type="comparison_block"></block>
             </category>
 
             <!-- Category: Variables -->
             <category name="Variables" colour="330">
-                <block type="variable_set"></block>
+                <block type="variable_declaration"></block>
+                <block type="integer"></block>
+                <block type="variable_name"></block>
             </category>
 
             <!-- Category: Pin Control -->
@@ -37,8 +46,29 @@ const workspace = Blockly.inject('blocklyDiv', {
             <category name="Serial Communication" colour="230">
                 <block type="serial_available"></block>
                 <block type="serial_read"></block>
+                <block type="serial_print"></block>
+                <block type="serial_println"></block>
+            </category>
+
+            <category name="Servo Control" colour="160">
+             <block type="servo_header"></block>
+            <block type="servo_object"></block>
+            <block type="servo_control"></block>
+            </category>
+
+            <category name="Analog I/O" colour="180">
+                <block type="analog_read"></block>  <!-- Analog Read Block -->
+                <block type="analog_write"></block>
+            </category>
+
+            <category name="Digital I/O" colour="160">
+                <block type="digital_read"></block>  <!-- Digital Read Block -->
+                <block type="digital_write"></block> <!-- Digital Write Block -->
+                <block type="digital_read_comparison"></block>
             </category>
         </xml>
+
+
     `
 });
 
