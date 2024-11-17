@@ -139,13 +139,25 @@ function saveWorkspace() {
     const xml = Blockly.Xml.workspaceToDom(workspace);  // Convert the workspace to XML
     const xmlText = Blockly.Xml.domToText(xml);  // Convert the XML DOM to a text string
 
-    // Create a Blob with the XML data and make it downloadable
-    const blob = new Blob([xmlText], { type: 'application/octet-stream' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'workspace.pimaker';  // Save as a .pimaker file
-    link.click();  // Trigger the download
-    alert("Workspace saved as workspace.pimaker!");
+    // Ask the user for the filename (without extension)
+    const filename = prompt("Enter a filename for your workspace:", "workspace");
+
+    // If the user enters a filename, proceed with saving
+    if (filename) {
+        // Ensure the filename has the correct extension (.pimaker)
+        const fullFilename = filename.endsWith('.pimaker') ? filename : filename + '.pimaker';
+
+        // Create a Blob with the XML data and make it downloadable
+        const blob = new Blob([xmlText], { type: 'application/octet-stream' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fullFilename;  // Use the provided filename with the .pimaker extension
+        link.click();  // Trigger the download
+
+        alert(`Workspace saved as ${fullFilename}`);
+    } else {
+        alert('Please provide a filename.');
+    }
 }
 
 // Function to load the workspace from a .pimaker file

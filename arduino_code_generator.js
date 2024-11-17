@@ -98,8 +98,6 @@ Blockly.JavaScript['comparison_block'] = function (block) {
     return [`${a} ${operator} ${b}`, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-
-
 // Servo Control Block (Generates code to set servo angle)
 Blockly.JavaScript['servo_control'] = function (block) {
     const pin = block.getFieldValue('PIN');
@@ -120,25 +118,25 @@ Blockly.JavaScript['servo_header'] = function (block) {
 };
 
 // Analog Read Block (Generates code for reading an analog value from the pin)
-Blockly.JavaScript['analog_read'] = function (block) {
-    const pin = block.getFieldValue('PIN');
+Blockly.JavaScript['analog_read'] = function(block) {
+    const pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
     return [`analogRead(${pin})`, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+
 // Analog Write Block (Generates code to write a PWM value to the specified pin)
-Blockly.JavaScript['analog_write'] = function (block) {
-    const pin = block.getFieldValue('PIN');
-    const value = block.getFieldValue('VALUE');
-    return `analogWrite(${pin}, ${value});\n`;
+Blockly.JavaScript['analog_write'] = function(block) {
+    const value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+    const pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
+    return `analogWrite(${pin}, ${value});\n`;  // Generates code like analogWrite(pinNumber, pwmValue);
 };
+
 
 // Digital Read Block (Generates code for reading a digital value from the pin)
 Blockly.JavaScript['digital_read'] = function (block) {
     const pin = block.getFieldValue('PIN');
     return [`digitalRead(${pin})`, Blockly.JavaScript.ORDER_ATOMIC];  // Return HIGH or LOW
 };
-
-
 
 // Digital Write Block (Generates code for writing a digital value to the pin)
 Blockly.JavaScript['digital_write'] = function (block) {
@@ -268,8 +266,6 @@ Blockly.JavaScript['map_function'] = function(block) {
     // Generate the Arduino code for the map function
     return [`map(${value}, ${inMin}, ${inMax}, ${outMin}, ${outMax})`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-
-
 
 // Code generation for "Move forward"
 Blockly.JavaScript['motion_forward'] = function(block) {

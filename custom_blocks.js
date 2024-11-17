@@ -332,19 +332,12 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Read analog value from pin %1",
         "args0": [
             {
-                "type": "field_dropdown",
+                "type": "input_value",
                 "name": "PIN",
-                "options": [
-                    ["A0", "A0"],
-                    ["A1", "A1"],
-                    ["A2", "A2"],
-                    ["A3", "A3"],
-                    ["A4", "A4"],
-                    ["A5", "A5"]
-                ]
+                "check": "String" // This allows the pin input to be a variable
             }
         ],
-        "output": "Number", // The block outputs a number (the analog reading)
+        "output": "Number",  // The block outputs a number (the analog reading)
         "colour": 180,
         "tooltip": "Reads the analog value from the specified pin (0-1023)",
         "helpUrl": ""
@@ -355,24 +348,17 @@ Blockly.defineBlocksWithJsonArray([
         "message0": "Write analog value %1 to pin %2",
         "args0": [
             {
-                "type": "field_number",
+                "type": "input_value",  // Accepts a variable or number for the value
                 "name": "VALUE",
-                "value": 128,
-                "min": 0,
-                "max": 255
+                "check": "String"  // Ensure the value is a number (or a variable that resolves to a number)
             },
             {
-                "type": "field_dropdown",
+                "type": "input_value",  // Accepts a variable for the pin
                 "name": "PIN",
-                "options": [
-                    ["9", "9"],
-                    ["10", "10"],
-                    ["11", "11"],
-                    ["3", "3"],
-                    ["5", "5"],
-                    ["6", "6"]
-                ]
-            }
+                "check": "String"  // Ensures the pin is a string (can be a variable like "A0", "A1", etc.)
+            },
+
+
         ],
         "previousStatement": null,
         "nextStatement": null,
@@ -791,7 +777,7 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
         "type": "map_function",  // Block type identifier
-        "message0": "map %1 from %2 to %3 to %4 to %5",  // Label for the block with placeholders
+        "message0": "map %1 from %2 to %3 → %4 to %5",  // Label for the block with placeholders
         "args0": [
             {
                 "type": "input_value",  // Input field for the value to be mapped
