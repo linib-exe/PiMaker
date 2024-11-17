@@ -1,3 +1,4 @@
+// Initialize Blockly workspace
 const workspace = Blockly.inject('blocklyDiv', {
     toolbox: `
         <xml xmlns="https://developers.google.com/blockly/xml">
@@ -7,6 +8,8 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="loop_block"></block>
                 <block type="delay_block"></block>
                 <block type="text"></block>
+                <block type="delay_microseconds"></block>
+                <block type="comment_block"></block>
             </category>
 
             <category name="Loop" colour="210">
@@ -17,8 +20,8 @@ const workspace = Blockly.inject('blocklyDiv', {
             <!-- Category: Logic -->
             <category name="Logic" colour="120">
                 <block type="if_then_block"></block>
-                <block type="if_else_if_else_block"></block>
-                <block type="if_else_if_block"></block>
+                <block type="else_if_block"></block>
+                <block type="else_block"></block>
                 <block type="boolean_block"></block>
                 <block type="comparison_block"></block>
             </category>
@@ -28,12 +31,14 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="variable_declaration"></block>
                 <block type="integer"></block>
                 <block type="variable_name"></block>
+                <block type="variable_assignment"></block>
+                <block type="variable_declaration2"></block>
             </category>
 
             <!-- Category: Pin Control -->
             <category name="Pin Control" colour="160">
-                <block type="pin_setup"></block>
                 <block type="led_control"></block>
+                <block type="pin_setup"></block>
             </category>
 
             <!-- Category: Bluetooth -->
@@ -42,7 +47,6 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="bluetooth_send"></block>
             </category>
 
-                      
             <category name="Serial Communication" colour="230">
                 <block type="serial_available"></block>
                 <block type="serial_read"></block>
@@ -51,9 +55,9 @@ const workspace = Blockly.inject('blocklyDiv', {
             </category>
 
             <category name="Servo Control" colour="160">
-             <block type="servo_header"></block>
-            <block type="servo_object"></block>
-            <block type="servo_control"></block>
+                <block type="servo_header"></block>
+                <block type="servo_object"></block>
+                <block type="servo_control"></block>
             </category>
 
             <category name="Analog I/O" colour="180">
@@ -66,12 +70,25 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="digital_write"></block> <!-- Digital Write Block -->
                 <block type="digital_read_comparison"></block>
             </category>
+
+            <category name="Ultrasonic Sensor" colour="160">
+                <block type="pulsein_block"></block>
+            </category>
+
+            <category name="Functions" colour="230">
+                <block type="map_function"></block>
+            </category>
+
+            <category name="Motion" colour="230">
+                <block type="motion_forward"></block>
+                <block type="motion_backward"></block>
+                <block type="motion_left"></block>
+                <block type="motion_right"></block>
+                <block type="motion_stop"></block>
+            </category>
         </xml>
-
-
     `
 });
-
 
 // Function to generate and display code
 const generateCode = () => {
@@ -116,3 +133,49 @@ document.getElementById('downloadCode').addEventListener('click', () => {
         alert('No code to download!');
     }
 });
+
+// Function to save the entire workspace as a .pimaker file
+function saveWorkspace() {
+    const xml = Blockly.Xml.workspaceToDom(workspace);  // Convert the workspace to XML
+    const xmlText = Blockly.Xml.domToText(xml);  // Convert the XML DOM to a text string
+
+    // Create a Blob with the XML data and make it downloadable
+    const blob = new Blob([xmlText], { type: 'application/octet-stream' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'workspace.pimaker';  // Save as a .pimaker file
+    link.click();  // Trigger the download
+    alert("Workspace saved as workspace.pimaker!");
+}
+
+// Function to load the workspace from a .pimaker file
+function loadWorkspace() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.pimaker';  // Accept .pimaker files
+
+    // Listen for the file being selected
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const xmlText = event.target.result;
+            const xml = Blockly.Xml.textToDom(xmlText);
+            Blockly.Xml.domToWorkspace(xml, workspace);  // Load the XML into the workspace
+
+            alert("Workspace loaded!");
+        };
+
+        reader.readAsText(file);  // Read the file as text
+    });
+
+    fileInput.click();  // Trigger the file input dialog
+}
+
+// Event listener for the "Save Workspace" button
+document.getElementById('saveWorkspaceButton').addEventListener('click', saveWorkspace);
+
+// Event listener for the "Load Workspace" button
+document.getElementById('loadWorkspaceButton').addEventListener('click', loadWorkspace);
