@@ -191,3 +191,15 @@ document.getElementById('saveWorkspaceButton').addEventListener('click', saveWor
 
 // Event listener for the "Load Workspace" button
 document.getElementById('loadWorkspaceButton').addEventListener('click', loadWorkspace);
+
+document.getElementById('toggleOutput').addEventListener('click', function() {
+    const outputSection = document.getElementById('outputSection');
+    
+    // Toggle the visibility of the output section
+    if (outputSection.style.display === 'none' || outputSection.style.display === '') {
+        outputSection.style.display = 'block';  // Show the section
+    } else {
+        outputSection.style.display = 'none';  // Hide the section
+    }
+});
+

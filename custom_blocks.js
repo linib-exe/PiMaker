@@ -168,45 +168,6 @@ Blockly.defineBlocksWithJsonArray([
         "helpUrl": ""
     },
     {
-        "type": "if_else_if_else_block",
-        "message0": "if %1 then %2",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "IF0",
-                "check": "Boolean"
-            },
-            {
-                "type": "input_statement",
-                "name": "DO0"
-            }
-        ],
-        "message1": "else if %1 then %2",
-        "args1": [
-            {
-                "type": "input_value",
-                "name": "IF1",
-                "check": "Boolean"
-            },
-            {
-                "type": "input_statement",
-                "name": "DO1"
-            }
-        ],
-        "message2": "else %1",
-        "args2": [
-            {
-                "type": "input_statement",
-                "name": "ELSE"
-            }
-        ],
-        "previousStatement": null,
-        "nextStatement": null,
-        "colour": 210,
-        "tooltip": "If-Else If-Else conditional block",
-        "helpUrl": ""
-    },
-    {
         "type": "boolean_block",
         "message0": "%1",
         "args0": [
@@ -473,7 +434,7 @@ Blockly.defineBlocksWithJsonArray([
 
     {
         "type": "for_loop",
-        "message0": "for %1 %2 %3 do %4",  // Structure of the block
+        "message0": "for i = %1  %2 %3 do %4",  // Structure of the block
         "args0": [
             {
                 "type": "input_value",  // Initialization input (e.g., `int i = 0`)
@@ -894,5 +855,6 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 210,  // Block color
         "tooltip": "Else statements to execute if the condition is false",  // Tooltip description
         "helpUrl": ""  // Optional help URL
-    }
+    },
+    
 ]);

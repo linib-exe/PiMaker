@@ -125,12 +125,11 @@ Blockly.JavaScript['analog_read'] = function(block) {
 
 
 // Analog Write Block (Generates code to write a PWM value to the specified pin)
-Blockly.JavaScript['analog_write'] = function(block) {
-    const value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
-    const pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
-    return `analogWrite(${pin}, ${value});\n`;  // Generates code like analogWrite(pinNumber, pwmValue);
+Blockly.JavaScript['analog_write'] = function (block) {
+    const pin = block.getFieldValue('PIN');
+    const value = block.getFieldValue('VALUE');
+    return `analogWrite(${pin}, ${value});\n`;
 };
-
 
 // Digital Read Block (Generates code for reading a digital value from the pin)
 Blockly.JavaScript['digital_read'] = function (block) {
