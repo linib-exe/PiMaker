@@ -11,6 +11,26 @@ body {
     min-height: 100vh;
 }
 
+/* Header section containing the logo and title */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px; /* Adds space below the header */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    width: 150px;  /* Adjust the size of the logo */
+    height: 50px;
+}
+
+/* Title Styling */
 h1 {
     font-size: 28px;
     color: #333;
@@ -30,7 +50,7 @@ h1 {
 
 /* Larger size for Blockly workspace */
 #blocklyDiv {
-    width: 1200px;  
+    width: 1050px;  
     height: 700px;  
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -40,7 +60,7 @@ h1 {
 
 /* Output Section Styling */
 #outputSection {
-    width: 400px;
+    width: 450px;
     background: #ffffff;
     padding: 20px;
     border-radius: 12px;

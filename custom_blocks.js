@@ -429,37 +429,11 @@ Blockly.defineBlocksWithJsonArray([
         ],
         "colour": 120,  // The color of the block
         "tooltip": "Repeat the contained code while the condition is true",
-        "helpUrl": ""
+        "helpUrl": "",
+        "previousStatement": null,  // Can connect to other blocks before
+        "nextStatement": null,
     },
 
-    {
-        "type": "for_loop",
-        "message0": "for i = %1  %2 %3 do %4",  // Structure of the block
-        "args0": [
-            {
-                "type": "input_value",  // Initialization input (e.g., `int i = 0`)
-                "name": "INIT",  // Name of the input
-                "check": "String"  // This is a String input (e.g., variable initialization)
-            },
-            {
-                "type": "input_value",  // Condition input (e.g., `i < 10`)
-                "name": "CONDITION",  // Name of the input
-                "check": "Boolean"  // The condition must evaluate to Boolean (true/false)
-            },
-            {
-                "type": "input_value",  // Increment input (e.g., `i++`)
-                "name": "INCREMENT",  // Name of the input
-                "check": "String"  // This is a String input (e.g., counter increment)
-            },
-            {
-                "type": "input_statement",  // The block that contains the loop body (statements inside the loop)
-                "name": "DO"  // The statements that will be repeated
-            }
-        ],
-        "colour": 120,  // Color of the block
-        "tooltip": "A basic for loop with initialization, condition, and increment",
-        "helpUrl": ""
-    },
     {
         "type": "serial_print",
         "message0": "Serial.print %1",
@@ -856,5 +830,30 @@ Blockly.defineBlocksWithJsonArray([
         "tooltip": "Else statements to execute if the condition is false",  // Tooltip description
         "helpUrl": ""  // Optional help URL
     },
+
+    {
+        "type": "for_loop",
+        "message0": "Repeat %1 times",  // Label for the block
+        "args0": [
+            {
+                "type": "input_value",  // The number of times to repeat
+                "name": "REPEAT_COUNT",  // The name of the field
+                "check": "Number"  // Ensure this is a number input
+            },
+        ],
+        "message1": "%1",  // The body of the loop (can contain blocks inside)
+        "args1": [
+            {
+                "type": "input_statement",  // This allows blocks to be inserted inside the loop
+                "name": "LOOP_BODY"  // The name for the input statement
+            }
+        ],
+        "colour": 120,  // Color of the block (green)
+        "previousStatement": null,  // Can connect to other blocks before
+        "nextStatement": null,  // Can connect to other blocks after
+          // This block doesn't output a value
+        "tooltip": "Repeat a block of code a specific number of times",
+        "helpUrl": ""
+    }
     
 ]);

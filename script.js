@@ -2,7 +2,6 @@
 const workspace = Blockly.inject('blocklyDiv', {
     toolbox: `
         <xml xmlns="https://developers.google.com/blockly/xml">
-            <!-- Category: Basic -->
             <category name="Basic" colour="210">
                 <block type="setup_block"></block>
                 <block type="loop_block"></block>
@@ -17,7 +16,6 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="for_loop"></block>
             </category>
 
-            <!-- Category: Logic -->
             <category name="Logic" colour="120">
                 <block type="if_then_block"></block>
                 <block type="else_if_block"></block>
@@ -26,7 +24,6 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="comparison_block"></block>
             </category>
 
-            <!-- Category: Variables -->
             <category name="Variables" colour="330">
                 <block type="variable_declaration"></block>
                 <block type="integer"></block>
@@ -35,13 +32,11 @@ const workspace = Blockly.inject('blocklyDiv', {
                 <block type="variable_declaration2"></block>
             </category>
 
-            <!-- Category: Pin Control -->
             <category name="Pin Control" colour="160">
                 <block type="led_control"></block>
                 <block type="pin_setup"></block>
             </category>
 
-            <!-- Category: Bluetooth -->
             <category name="Bluetooth" colour="300">
                 <block type="bluetooth_init"></block>
                 <block type="bluetooth_send"></block>
@@ -61,13 +56,13 @@ const workspace = Blockly.inject('blocklyDiv', {
             </category>
 
             <category name="Analog I/O" colour="180">
-                <block type="analog_read"></block>  <!-- Analog Read Block -->
+                <block type="analog_read"></block>
                 <block type="analog_write"></block>
             </category>
 
             <category name="Digital I/O" colour="160">
-                <block type="digital_read"></block>  <!-- Digital Read Block -->
-                <block type="digital_write"></block> <!-- Digital Write Block -->
+                <block type="digital_read"></block>
+                <block type="digital_write"></block>
                 <block type="digital_read_comparison"></block>
             </category>
 
@@ -94,11 +89,13 @@ const workspace = Blockly.inject('blocklyDiv', {
 const generateCode = () => {
     try {
         const code = Blockly.JavaScript.workspaceToCode(workspace);
-        document.getElementById('outputCode').textContent = code || 'No blocks in workspace!';
+        const outputElement = document.getElementById('outputCode');
+        outputElement.textContent = code || 'No blocks in workspace!';
     } catch (error) {
         document.getElementById('outputCode').textContent = `Error generating code: ${error.message}`;
     }
 };
+
 
 // Add a change listener to the workspace to auto-generate code
 workspace.addChangeListener(generateCode);
@@ -106,7 +103,6 @@ workspace.addChangeListener(generateCode);
 // Initial code generation to show default state
 generateCode();
 
-// Copy code to clipboard
 document.getElementById('copyCode').addEventListener('click', () => {
     const code = document.getElementById('outputCode').textContent;
     if (code.trim()) {
@@ -117,6 +113,7 @@ document.getElementById('copyCode').addEventListener('click', () => {
         alert('No code to copy!');
     }
 });
+
 
 // Download code as .ino file
 document.getElementById('downloadCode').addEventListener('click', () => {
@@ -202,4 +199,3 @@ document.getElementById('toggleOutput').addEventListener('click', function() {
         outputSection.style.display = 'none';  // Hide the section
     }
 });
-

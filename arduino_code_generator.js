@@ -178,15 +178,7 @@ Blockly.JavaScript['while_loop'] = function (block) {
     const statements = Blockly.JavaScript.statementToCode(block, 'DO');  // Get the statements inside the loop
     return `while (${condition}) {\n${statements}}\n`;  // Generate the while loop code
 };
-Blockly.JavaScript['for_loop'] = function (block) {
-    const init = Blockly.JavaScript.valueToCode(block, 'INIT', Blockly.JavaScript.ORDER_ATOMIC) || 'int i = 0';  // Get initialization code (e.g., `int i = 0`)
-    const condition = Blockly.JavaScript.valueToCode(block, 'CONDITION', Blockly.JavaScript.ORDER_ATOMIC) || 'i < 10';  // Get the condition (e.g., `i < 10`)
-    const increment = Blockly.JavaScript.valueToCode(block, 'INCREMENT', Blockly.JavaScript.ORDER_ATOMIC) || 'i++';  // Get the increment (e.g., `i++`)
-    const statements = Blockly.JavaScript.statementToCode(block, 'DO');  // Get the statements inside the loop
 
-    // Return the generated code
-    return `for (${init}; ${condition}; ${increment}) {\n${statements}}\n`;
-};
 Blockly.JavaScript['serial_print'] = function (block) {
     const value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);  // Get the value to be printed
     return `Serial.print(${value});\n`;  // Generate the Serial.print() code
@@ -330,6 +322,19 @@ Blockly.JavaScript['else_block'] = function(block) {
     return `else {\n${statements}}\n`;
 };
 
+
+Blockly.JavaScript['for_loop'] = function(block) {
+    // Get the number of repetitions (repeat count)
+    const repeatCount = Blockly.JavaScript.valueToCode(block, 'REPEAT_COUNT', Blockly.JavaScript.ORDER_ATOMIC);
+    
+    // Get the blocks inside the loop body
+    const loopBody = Blockly.JavaScript.statementToCode(block, 'LOOP_BODY');
+    
+    // Generate the for loop code
+    const code = `for (int i = 0; i < ${repeatCount}; i++) {\n  ${loopBody}}\n`;
+    
+    return code;  // Return the generated code
+};
 
 
 
