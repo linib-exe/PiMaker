@@ -26,7 +26,6 @@ const workspace = Blockly.inject('blocklyDiv', {
 
             <category name="Variables" colour="330">
                 <block type="variable_declaration"></block>
-                <block type="integer"></block>
                 <block type="variable_name"></block>
                 <block type="variable_assignment"></block>
                 <block type="variable_declaration2"></block>
@@ -72,6 +71,8 @@ const workspace = Blockly.inject('blocklyDiv', {
 
             <category name="Functions" colour="230">
                 <block type="map_function"></block>
+                <block type="function_definition"></block>
+                <block type="function_call"></block>
             </category>
 
             <category name="Motion" colour="230">
@@ -157,11 +158,12 @@ function saveWorkspace() {
     }
 }
 
-// Function to load the workspace from a .pimaker file
+
+
 function loadWorkspace() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
-    fileInput.accept = '.pimaker';  // Accept .pimaker files
+    fileInput.accept = '.pimaker';  
 
     // Listen for the file being selected
     fileInput.addEventListener('change', async (e) => {
@@ -177,11 +179,12 @@ function loadWorkspace() {
             alert("Workspace loaded!");
         };
 
-        reader.readAsText(file);  // Read the file as text
+        reader.readAsText(file);  
     });
 
     fileInput.click();  // Trigger the file input dialog
 }
+
 
 // Event listener for the "Save Workspace" button
 document.getElementById('saveWorkspaceButton').addEventListener('click', saveWorkspace);
@@ -199,3 +202,5 @@ document.getElementById('toggleOutput').addEventListener('click', function() {
         outputSection.style.display = 'none';  // Hide the section
     }
 });
+
+

@@ -337,4 +337,23 @@ Blockly.JavaScript['for_loop'] = function(block) {
 };
 
 
+Blockly.JavaScript['function_definition'] = function(block) {
+    const functionName = block.getFieldValue('NAME');
+    const params = Blockly.JavaScript.valueToCode(block, 'PARAMS', Blockly.JavaScript.ORDER_NONE) || '';
+    const body = Blockly.JavaScript.statementToCode(block, 'BODY');
+    
+    const code = `void ${functionName}(${params}) {\n${body}\n}\n`;
+    return code;
+};
+
+Blockly.JavaScript['function_call'] = function(block) {
+    const functionName = block.getFieldValue('NAME');
+    const params = Blockly.JavaScript.valueToCode(block, 'PARAMS', Blockly.JavaScript.ORDER_NONE) || '';
+    
+    const code = `${functionName}(${params});\n`;
+    return code;
+};
+
+
+
 

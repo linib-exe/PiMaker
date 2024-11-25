@@ -854,6 +854,54 @@ Blockly.defineBlocksWithJsonArray([
           // This block doesn't output a value
         "tooltip": "Repeat a block of code a specific number of times",
         "helpUrl": ""
+    },
+    {
+        "type": "function_definition",
+        "message0": "function %1 (%2) %3",
+        "args0": [
+            {
+                "type": "field_input",
+                "name": "NAME",
+                "text": "myFunction"  // Default function name
+            },
+            {
+                "type": "input_value",
+                "name": "PARAMS",
+                "check": "String"
+            },
+            {
+                "type": "input_statement",
+                "name": "BODY"
+            }
+        ],
+        "colour": 230,
+        "tooltip": "Define a function with a name and parameters",
+        "helpUrl": "",
+        
+        "previousStatement": null,
+        "nextStatement": null
+    },
+    {
+        "type": "function_call",
+        "message0": "%1(%2)",
+        "args0": [
+            {
+                "type": "field_input",
+                "name": "NAME",
+                "text": "myFunction"  // Default function name
+            },
+            {
+                "type": "input_value",
+                "name": "PARAMS",
+                "check": "String"  // Accepts a string as a parameter
+            }
+        ],
+        "colour": 230,
+        "tooltip": "Call an existing function with arguments",
+        "helpUrl": "",
+       
+        "previousStatement": null,
+        "nextStatement": null
     }
     
 ]);
